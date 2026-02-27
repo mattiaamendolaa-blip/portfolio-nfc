@@ -1,0 +1,65 @@
+.projects-section {
+  padding: 60px 0;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: #00f5c4;
+    transform: translateY(-5px);
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    margin: 12px 0;
+  }
+
+  p {
+    color: #777;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  
+  .year { color: #00f5c4; }
+  .github-link { color: #444; }
+}
+
+.project-tags {
+  display: flex;
+  gap: 8px;
+  span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(0, 245, 196, 0.1);
+    color: #00f5c4;
+  }
+}
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
