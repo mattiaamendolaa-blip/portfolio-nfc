@@ -5,11 +5,10 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  templateUrl: './app.html',  
+  styleUrl: './app.scss'
 })
-export class AppComponent implements OnInit, AfterViewInit {
-  // --- CONFIGURAZIONE TESTI TYPEWRITER ---
+export class App implements OnInit, AfterViewInit {
   texts: string[] = [
     "Studente ITS Rizzoli", 
     "Full Stack Developer", 
@@ -25,20 +24,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
-    // Avviamo l'effetto scrittura solo se siamo nel browser
     if (isPlatformBrowser(this.platformId)) {
       this.type();
     }
   }
 
   ngAfterViewInit() {
-    // Avviamo le animazioni di comparsa (Reveal) allo scroll
     if (isPlatformBrowser(this.platformId)) {
       this.initScrollReveal();
     }
   }
-
-  // --- LOGICA EFFETTO SCRITTURA ---
   type() {
     const currentFullText = this.texts[this.textIdx];
     
@@ -50,20 +45,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     let typeSpeed = this.isDeleting ? 50 : 100;
 
-    // Gestione pause tra una parola e l'altra
     if (!this.isDeleting && this.charIdx === currentFullText.length + 1) {
-      typeSpeed = 2000; // Pausa a parola completa
+      typeSpeed = 2000;
       this.isDeleting = true;
     } else if (this.isDeleting && this.charIdx === 0) {
       this.isDeleting = false;
       this.textIdx = (this.textIdx + 1) % this.texts.length;
-      typeSpeed = 500; // Pausa prima di iniziare la nuova parola
+      typeSpeed = 500;
     }
 
     setTimeout(() => this.type(), typeSpeed);
   }
-
-  // --- LOGICA ANIMAZIONI ALLO SCROLL (REVEAL) ---
   private initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -72,18 +64,15 @@ export class AppComponent implements OnInit, AfterViewInit {
         }
       });
     }, { 
-      threshold: 0.1 // L'elemento appare quando è visibile al 10%
+      threshold: 0.1 
     });
 
-    // Seleziona tutti gli elementi che devono "animarsi"
     const elementsToReveal = document.querySelectorAll('.section, .project-card, .skill-group');
     elementsToReveal.forEach(el => {
       el.classList.add('reveal-hidden');
       observer.observe(el);
     });
   }
-
-  // --- AZIONI UTENTE ---
   scrollTo(id: string) {
     const element = document.getElementById(id);
     if (element) {
